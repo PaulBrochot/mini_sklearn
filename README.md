@@ -87,8 +87,8 @@ print(modeles[1].predict([75]))   # estimated price for 75 m²
 
 | Model | Mean absolute error (k€) |
 |---|---|
-| ModeleMoyenne | … |
-| RegressionLineaire | … |
+| ModeleMoyenne | 85 |
+| RegressionLineaire | 3.2 |
 | KPlusProchesVoisins (k=3) | … |
 
 > ⚠️ With only 10 apartments, the test set contains just 2 examples, so results vary from one run to the next depending on the random split.
