@@ -24,3 +24,18 @@ class ModeleMoyenne(Modele) :
 
     def predict(self, X): 
         return [self.moyenne for x in X ]
+
+class RegressionLineaire(Modele):
+    def fit(self,X,y):
+        moy_x = sum(X) / len(X)
+        moy_y = sum(y) / len(y)
+        numerateur = sum((x - moy_x) * (yi - moy_y) for x, yi in zip(X,y))
+        denominateur = sum((x - moy_x)**2 for x in X)
+
+        self.a = numerateur / denominateur
+        self.b = moy_y - self.a * moy_x
+
+        self.entraine = True
+
+    def predict(self, X): 
+        return [self.a * x + self.b for x in X]

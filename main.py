@@ -15,14 +15,22 @@ from donnees import Dataset
 
 data = Dataset("appartements.csv")
 X_train, y_train, X_test, y_test = data.separer(0.8)
-print(len(data.X), data.y)
-print(len(y_train), y_train)
+#print(len(data.X), data.y)
+#print(len(y_train), y_train)
 #print(X_test, y_test)
 
-from modeles import ModeleMoyenne
+# from modeles import ModeleMoyenne
 
-m = ModeleMoyenne()
-m.fit(X_train, y_train)
-print(m.moyenne)
-print(m.predict([30, 75, 120]))
-print(m.score(X_test, y_test))
+# m = ModeleMoyenne()
+# m.fit(X_train, y_train)
+# print(m.moyenne)
+# print(m.predict([30, 75, 120]))
+# print(m.score(X_test, y_test))
+
+from modeles import RegressionLineaire
+
+r = RegressionLineaire()
+r.fit(X_train, y_train)
+print(r.a, r.b)
+print(r.predict([75]))
+print(r.score(X_test, y_test))
