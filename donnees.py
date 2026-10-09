@@ -17,7 +17,7 @@ class Dataset :
         train = paires[:coupure]
         test = paires[coupure:]
         X_train = [p[0] for p in train]
-        y_train =[p[1] for p in test]
+        y_train =[p[1] for p in train]
         X_test = [p[0]for p in test]
         y_test = [p[1] for p in test]
         return X_train, y_train, X_test, y_test
