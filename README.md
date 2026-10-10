@@ -106,7 +106,7 @@
 
     - Designing a **base class** and **child classes** (inheritance, `super()`)
     - **Polymorphism**: a single loop calls `fit()` and `predict()` on different models
-    - Raising exceptions (`NotImplementedError`)
+    - Raising exceptions (`NotImplementedError`,`RuntimeError` when predicting with an untrained model)
     - Reading a CSV file and splitting data into training and test sets
     - How classic machine learning models work under the hood
 

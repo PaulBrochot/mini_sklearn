@@ -16,13 +16,18 @@ class Modele :
             ecarts.append(abs(p - vrai))
 
         return sum(ecarts) / len(ecarts)
-
+    
+    def verifier_entraine(self):
+        if not self.entraine  :
+            raise RuntimeError("Le modèle n'est pas entraîné : appelle fit() avant predict().")
+    
 class ModeleMoyenne(Modele) : 
-    def fit(self, X, y):
+    def fit(self, X, y):    
         self.moyenne = sum(y)/len(y)
         self.entraine = True
 
     def predict(self, X): 
+        self.verifier_entraine()
         return [self.moyenne for x in X ]
 
 class RegressionLineaire(Modele):
@@ -38,6 +43,7 @@ class RegressionLineaire(Modele):
         self.entraine = True
 
     def predict(self, X): 
+        self.verifier_entraine()
         return [self.a * x + self.b for x in X]
 
 class KPlusProchesVoisins(Modele):
@@ -50,6 +56,7 @@ class KPlusProchesVoisins(Modele):
         self.entraine = True 
 
     def predict(self, X):
+        self.verifier_entraine()
         predictions = []
         for x in X :
             tries = sorted(self.donnees, key=lambda p : abs(p[0]-x))
