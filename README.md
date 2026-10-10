@@ -90,6 +90,7 @@ print(modeles[1].predict([75]))   # estimated price for 75 m²
 | ModeleMoyenne | 85 |
 | RegressionLineaire | 3.2 |
 | KPlusProchesVoisins (k=3) | … |
+*Results from a single run; exact values vary with the random split.*
 
 > ⚠️ With only 10 apartments, the test set contains just 2 examples, so results vary from one run to the next depending on the random split.
 
