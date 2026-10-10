@@ -39,3 +39,21 @@ class RegressionLineaire(Modele):
 
     def predict(self, X): 
         return [self.a * x + self.b for x in X]
+
+class KPlusProchesVoisins(Modele):
+    def __init__(self,k=3):
+        super().__init__()
+        self.k = k
+
+    def fit(self, X, y): 
+        self.donnees = list(zip(X,y))
+        self.entraine = True 
+
+    def predict(self, X):
+        predictions = []
+        for x in X :
+            tries = sorted(self.donnees, key=lambda p : abs(p[0]-x))
+            voisins = tries[:self.k]
+            moyenne = sum(p[1] for p in voisins) / len(voisins)
+            predictions.append(moyenne)
+        return predictions

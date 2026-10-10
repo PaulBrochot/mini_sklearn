@@ -83,18 +83,21 @@ print(modeles[1].predict([75]))   # estimated price for 75 m²
 
 ## Results
 
-<!-- To be completed once the project is finished -->
+With `random.seed(42)`, the test set contains the two **smallest** apartments (30 m² and 35 m²):
 
 | Model | Mean absolute error (k€) |
 |---|---|
-| ModeleMoyenne | 85 |
-| RegressionLineaire | 3.2 |
-| KPlusProchesVoisins (k=3) | … |
-*Results from a single run; exact values vary with the random split.*
+| ModeleMoyenne | 188.8 |
+| RegressionLineaire | 0.9 |
+| KPlusProchesVoisins (k=3) | 81.7 |
 
-> ⚠️ With only 10 apartments, the test set contains just 2 examples, so results vary from one run to the next depending on the random split.
+**Analysis**
 
----
+- The linear regression is by far the best: the data is almost perfectly linear, and the line keeps working **outside** the range seen during training.
+- k-nearest neighbors struggles here because it **cannot extrapolate**: for a 30 m² apartment, its 3 closest neighbors in the training set are 45, 50 and 60 m², so it predicts their average price (~242 k€) instead of ~150 k€.
+- The baseline (`ModeleMoyenne`) ignores the surface completely, so it makes the largest error.
+
+> ⚠️ With only 10 apartments, the test set contains just 2 examples: results change a lot with the random split. Try another seed to see k-nearest neighbors perform much better on apartments in the middle of the range.
 
 ## What I learned
 

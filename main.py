@@ -1,36 +1,25 @@
-import donnees
-
-# data = Dataset("appartements.csv")
-# X_train, y_train, X_test, y_test = data.separer(0.8)
-
-# modeles = [ModeleMoyenne(), RegressionLineaire(), KPlusProchesVoisins(k=3)]
-
-# for m in modeles:
-#     m.fit(X_train, y_train)
-#     print(type(m).__name__, "→ erreur moyenne :", round(m.score(X_test, y_test), 1))
-
-# print(modeles[1].predict([75]))   # prix estimé pour 75 m²
+import random
 
 from donnees import Dataset
+from modeles import ModeleMoyenne, RegressionLineaire, KPlusProchesVoisins
 
+# Fixe le hasard 
+random.seed(42)
+
+# 1. Charger et séparer les données
 data = Dataset("appartements.csv")
 X_train, y_train, X_test, y_test = data.separer(0.8)
-#print(len(data.X), data.y)
-#print(len(y_train), y_train)
-#print(X_test, y_test)
 
-# from modeles import ModeleMoyenne
+# 2. Créer les modèles
+modeles = [ModeleMoyenne(), RegressionLineaire(), KPlusProchesVoisins(k=3)]
 
-# m = ModeleMoyenne()
-# m.fit(X_train, y_train)
-# print(m.moyenne)
-# print(m.predict([30, 75, 120]))
-# print(m.score(X_test, y_test))
+# 3. Entraîner et évaluer chaque modèle
+print("=== Erreur moyenne sur le jeu de test ===")
+for m in modeles:
+    m.fit(X_train, y_train)
+    print(type(m).__name__, "→", round(m.score(X_test, y_test), 1), "k€")
 
-from modeles import RegressionLineaire
-
-r = RegressionLineaire()
-r.fit(X_train, y_train)
-print(r.a, r.b)
-print(r.predict([75]))
-print(r.score(X_test, y_test))
+# 4. Prédire le prix d'un appartement de 75 m² avec chaque modèle
+print("\n=== Prix estimé pour 75 m² ===")
+for m in modeles:
+    print(type(m).__name__, "→", round(m.predict([75])[0], 1), "k€")
